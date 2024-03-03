@@ -5,6 +5,7 @@ class Contact:
         self.email = email
         self.address = address
 
+
 class ContactBook:
     def __init__(self):
         self.contacts = []
