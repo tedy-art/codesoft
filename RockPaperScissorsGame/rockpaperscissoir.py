@@ -1,54 +1,38 @@
 import random
 
-def get_user_choice():
-    while True:
-        user_choice = input("Choose rock, paper, or scissors: ").lower()
-        if user_choice in ["rock", "paper", "scissors"]:
-            return user_choice
-        else:
-            print("Invalid choice. Please enter rock, paper, or scissors.")
+user_win = 0
+computer_win = 0
 
-def get_computer_choice():
-    return random.choice(["rock", "paper", "scissors"])
+options = ["rock", "paper", "scissors"]
 
-def determine_winner(user_choice, computer_choice):
-    if user_choice == computer_choice:
-        return "It's a tie!"
-    elif (
-        (user_choice == "rock" and computer_choice == "scissors") or
-        (user_choice == "scissors" and computer_choice == "paper") or
-        (user_choice == "paper" and computer_choice == "rock")
-    ):
-        return "You win!"
+while True:
+    user_input = input("Type Rock/Paper/Scissors or Q to Quit: ").lower()
+    if user_input == "q":
+        break
+
+    if user_input not in options:
+        continue
+
+    random_number = random.randint(0, 2)
+    # rock : 0, peper : 1, scissors : 2
+    computer_pick = options[random_number]
+    print("Computer picked : ", computer_pick+".")
+
+    if user_input == "rock" and computer_pick == "scissors":
+        print("You win!")
+        user_win += 1
+
+    elif user_input == "paper" and computer_pick == "rock":
+        print("You win!")
+        user_win += 1
+
+    elif user_input == "scissors" and computer_pick == "paper":
+        print("You win!")
+        user_win += 1
+
     else:
-        return "Computer wins!"
-
-def rock_paper_scissors_game():
-    user_score = 0
-    computer_score = 0
-
-    while True:
-        print("\nRock-Paper-Scissors Game")
-        user_choice = get_user_choice()
-        computer_choice = get_computer_choice()
-
-        print(f"\nYou chose: {user_choice}")
-        print(f"Computer chose: {computer_choice}")
-
-        result = determine_winner(user_choice, computer_choice)
-        print(result)
-
-        if "win" in result:
-            user_score += 1
-        elif "Computer" in result:
-            computer_score += 1
-
-        print(f"\nScore - You: {user_score}, Computer: {computer_score}")
-
-        play_again = input("Do you want to play again? (yes/no): ").lower()
-        if play_again != "yes":
-            print("Thanks for playing. Goodbye!")
-            break
-
-if __name__ == "__main__":
-    rock_paper_scissors_game()
+        print("you lost!")
+        computer_win += 1
+print("You won", user_win, "times.")
+print("Computer won", computer_win, "times.")
+print("GoodBye!")
